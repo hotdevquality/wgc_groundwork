@@ -3,16 +3,18 @@
 
   <!-- TODO- Perhaps re-jig this to fit your new design / layout -->
   <% @profile.each do |field, value| %>
+
     <div class="profile-section box">
-      <h4><%= field %></h4>
-      <p class="profile-value"><%= value %></p>
-    </div>
+      <h1><%= field %></h1>
+      <p class="profile-value"><%= value %></p>      
+    </div>    
   <% end %>
 
   <div id="stats" class="box">
     <h3>Stats</h3>
-    <!-- TODO - Set the contents of this span with JavaScript -->
-    <span id="word-count">0</span> words found.
+    <!-- TODO - Set the contents of this span with JavaScript -->   
+
+    <span id="counting" value="total_words" onload="countWords(str)">0</span> words found.
   </div>
 
   <div id="problems" class="box">
@@ -27,7 +29,7 @@
       <fieldset>
         <div class="form-group">
           <label for="trainee[about]">About</label>
-          <input type="text" name="trainee[about]" value="<%= @profile["about"] %>"/>
+          <textarea rows="5" name="trainee[about]" value="<%= @profile["about"] %>" /></textarea>
         </div>
 
         <!-- TODO - Add more fields so that your profile can be edited -->
@@ -44,16 +46,23 @@
   </div>
 <% end %>
 
-
 <!-- Add your Javascript to this script tag -->
-<script language="javascript">
-  console.log("I am Javascript!");
+<script language="javascript">  
 
+  function countWords(str) {
   var profile_values = document.getElementsByClassName('profile-value');
   var total_words = 0;
+  for (var total_words = 1; total_words <= str.length; total_words++) {
+    if (str.charAt(total_words) === " "){
+      count++;
+    }    
+  }
+  return count + 1;
+}
+  console.log(countWords("profile-value"));
 
   // TODO - Count the number of words in the profile.
   // hint - look at what the innerHTML property provides.
 
-  document.getElementById('word-count').innerHTML = total_words;
+  //document.getElementById('word_count').innerHTML = total_words;
 </script>
